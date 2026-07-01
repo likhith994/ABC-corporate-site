@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ABC Technologies | Cloud Integration & DevOps</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- =================== NAVBAR =================== -->
+
+<header>
+
+    <header>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+</header>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            Accelerate Your Digital Transformation
+        </h1>
+
+        <p>
+
+            We build scalable Cloud Infrastructure,
+            modern DevOps Pipelines and Enterprise
+            Solutions that empower businesses worldwide.
+
+        </p>
+
+        <a th:href="@{/services}" class="btn">
+
+            Explore Services
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about-preview">
+
+    <h2>Who We Are</h2>
+
+    <p>
+
+        ABC Technologies is a cloud-first IT company
+        delivering enterprise-grade cloud integration,
+        Kubernetes deployments, DevOps automation,
+        CI/CD pipelines and monitoring solutions.
+
+    </p>
+
+</section>
+
+
+<!-- ================= SERVICES ================= -->
+
+<section class="services">
+
+    <h2>Our Services</h2>
+
+    <div class="service-grid">
+
+        <div class="service-card"
+             th:each="service : ${services}">
+
+            <h3 th:text="${service.title}"></h3>
+
+            <p th:text="${service.description}"></p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TECHNOLOGIES ================= -->
+
+<section class="technology">
+
+    <h2>Technologies We Work With</h2>
+
+    <div class="tech-grid">
+
+        <div class="tech-card">
+            <i class="fa-brands fa-docker"></i>
+            <h3>Docker</h3>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-solid fa-dharmachakra"></i>
+            <h3>Kubernetes</h3>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-solid fa-code-branch"></i>
+            <h3>Git</h3>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-solid fa-gears"></i>
+            <h3>Jenkins</h3>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-solid fa-chart-line"></i>
+            <h3>Grafana</h3>
+        </div>
+
+        <div class="tech-card">
+            <i class="fa-solid fa-server"></i>
+            <h3>Nagios</h3>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= WHY CHOOSE US ================= -->
+
+<section class="why-us">
+
+    <h2>Why Choose ABC Technologies?</h2>
+
+    <div class="features">
+
+        <div class="feature">
+
+            <i class="fa-solid fa-cloud"></i>
+
+            <h3>Cloud Native</h3>
+
+            <p>
+
+                Secure, scalable and resilient cloud
+                infrastructure solutions.
+
+            </p>
+
+        </div>
+
+        <div class="feature">
+
+            <i class="fa-solid fa-bolt"></i>
+
+            <h3>Fast Delivery</h3>
+
+            <p>
+
+                Automated CI/CD pipelines ensure
+                faster software releases.
+
+            </p>
+
+        </div>
+
+        <div class="feature">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <h3>Reliable</h3>
+
+            <p>
+
+                High availability infrastructure
+                backed by continuous monitoring.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+    <h2>
+
+        Ready to Transform Your Business?
+
+    </h2>
+
+    <a th:href="@{/contact}" class="btn">
+
+        Contact Us
+
+    </a>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+
+<script th:src="@{/js/script.js}"></script>
+
+</body>
+
+</html>

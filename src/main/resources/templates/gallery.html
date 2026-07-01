@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gallery | ABC Technologies</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<header>
+
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+</header>
+
+<!-- Banner -->
+
+<section class="page-banner">
+
+    <div class="banner-content">
+
+        <h1>Our Gallery</h1>
+
+        <p>
+
+            Discover our modern workplace, cloud infrastructure,
+            engineering culture, and technology-driven environment.
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- Intro -->
+
+<section class="gallery-intro">
+
+    <h2>Innovation in Action</h2>
+
+    <p>
+
+        At ABC Technologies, we create reliable cloud solutions,
+        automate software delivery, and help organizations embrace
+        digital transformation through DevOps and modern technologies.
+
+    </p>
+
+</section>
+
+<!-- Gallery -->
+
+<section class="gallery-section">
+
+    <div class="gallery-grid">
+
+        <div class="gallery-item">
+
+            <img src="https://picsum.photos/600/400?random=11">
+
+            <div class="gallery-content">
+
+                <h3>Corporate Office</h3>
+
+                <p>Modern collaborative workspace.</p>
+
+            </div>
+
+        </div>
+
+        <div class="gallery-item">
+
+            <img src="https://picsum.photos/600/400?random=12">
+
+            <div class="gallery-content">
+
+                <h3>Engineering Team</h3>
+
+                <p>Developers collaborating on cloud solutions.</p>
+
+            </div>
+
+        </div>
+
+        <div class="gallery-item">
+
+            <img src="https://picsum.photos/600/400?random=13">
+
+            <div class="gallery-content">
+
+                <h3>Cloud Infrastructure</h3>
+
+                <p>Scalable cloud environments for enterprise clients.</p>
+
+            </div>
+
+        </div>
+
+        <div class="gallery-item">
+
+            <img src="https://picsum.photos/600/400?random=14">
+
+            <div class="gallery-content">
+
+                <h3>Data Center</h3>
+
+                <p>Reliable infrastructure powering applications.</p>
+
+            </div>
+
+        </div>
+
+        <div class="gallery-item">
+
+            <img src="https://picsum.photos/600/400?random=15">
+
+            <div class="gallery-content">
+
+                <h3>Client Meetings</h3>
+
+                <p>Working closely with businesses worldwide.</p>
+
+            </div>
+
+        </div>
+
+        <div class="gallery-item">
+
+            <img src="https://picsum.photos/600/400?random=16">
+
+            <div class="gallery-content">
+
+                <h3>DevOps Operations</h3>
+
+                <p>Automated CI/CD and continuous monitoring.</p>
+
+            </div>
+
+        </div>
+
+        <div class="gallery-item">
+
+            <img src="https://picsum.photos/600/400?random=17">
+
+            <div class="gallery-content">
+
+                <h3>Cloud Security</h3>
+
+                <p>Secure infrastructure with modern practices.</p>
+
+            </div>
+
+        </div>
+
+        <div class="gallery-item">
+
+            <img src="https://picsum.photos/600/400?random=18">
+
+            <div class="gallery-content">
+
+                <h3>Innovation Lab</h3>
+
+                <p>Exploring the future of cloud computing.</p>
+
+            </div>
+
+        </div>
+
+        <div class="gallery-item">
+
+            <img src="https://picsum.photos/600/400?random=19">
+
+            <div class="gallery-content">
+
+                <h3>Technology Showcase</h3>
+
+                <p>Docker, Kubernetes, Jenkins and monitoring tools.</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="cta">
+
+    <h2>Partner With ABC Technologies</h2>
+
+    <p style="color:white; margin-bottom:30px;">
+
+        Empower your business with reliable Cloud Integration,
+        DevOps automation and enterprise-grade solutions.
+
+    </p>
+
+    <a th:href="@{/contact}" class="btn">
+
+        Contact Us
+
+    </a>
+
+</section>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script th:src="@{/js/script.js}"></script>
+
+</body>
+
+</html>

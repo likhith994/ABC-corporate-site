@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Services | ABC Technologies</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<header>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+</header>
+
+<!-- PAGE HEADER -->
+
+<section class="page-banner">
+
+    <div class="banner-content">
+
+        <h1>Our Services</h1>
+
+        <p>
+
+            We provide modern cloud and DevOps solutions that help
+            businesses deliver software faster, securely and reliably.
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- SERVICES -->
+
+<section class="service-section">
+
+    <div class="service-box">
+
+        <i class="fa-solid fa-cloud"></i>
+
+        <h3>Cloud Integration</h3>
+
+        <p>
+
+            Seamlessly integrate enterprise applications with public,
+            private and hybrid cloud environments.
+
+        </p>
+
+    </div>
+
+    <div class="service-box">
+
+        <i class="fa-solid fa-gears"></i>
+
+        <h3>DevOps Consulting</h3>
+
+        <p>
+
+            Improve collaboration between development and operations
+            using DevOps best practices.
+
+        </p>
+
+    </div>
+
+    <div class="service-box">
+
+        <i class="fa-brands fa-docker"></i>
+
+        <h3>Docker Containerization</h3>
+
+        <p>
+
+            Package applications into lightweight containers for
+            consistent deployments across environments.
+
+        </p>
+
+    </div>
+
+    <div class="service-box">
+
+        <i class="fa-solid fa-dharmachakra"></i>
+
+        <h3>Kubernetes Deployment</h3>
+
+        <p>
+
+            Deploy, scale and manage containerized applications
+            efficiently using Kubernetes.
+
+        </p>
+
+    </div>
+
+    <div class="service-box">
+
+        <i class="fa-solid fa-code-branch"></i>
+
+        <h3>CI/CD Automation</h3>
+
+        <p>
+
+            Build automated pipelines using Git and Jenkins
+            for faster software delivery.
+
+        </p>
+
+    </div>
+
+    <div class="service-box">
+
+        <i class="fa-solid fa-chart-line"></i>
+
+        <h3>Monitoring & Observability</h3>
+
+        <p>
+
+            Monitor infrastructure and applications using
+            Nagios, Graphite and Grafana.
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- PROCESS -->
+
+<section class="workflow">
+
+    <h2>Our DevOps Workflow</h2>
+
+    <div class="workflow-container">
+
+        <div class="step">Plan</div>
+
+        <div class="arrow">→</div>
+
+        <div class="step">Develop</div>
+
+        <div class="arrow">→</div>
+
+        <div class="step">Build</div>
+
+        <div class="arrow">→</div>
+
+        <div class="step">Test</div>
+
+        <div class="arrow">→</div>
+
+        <div class="step">Deploy</div>
+
+        <div class="arrow">→</div>
+
+        <div class="step">Monitor</div>
+
+    </div>
+
+</section>
+
+<!-- TECHNOLOGIES -->
+
+<section class="technology-list">
+
+    <h2>Technologies We Use</h2>
+
+    <div class="tech-list">
+
+        <span>Docker</span>
+
+        <span>Kubernetes</span>
+
+        <span>Git</span>
+
+        <span>Jenkins</span>
+
+        <span>Spring Boot</span>
+
+        <span>AWS</span>
+
+        <span>Grafana</span>
+
+        <span>Nagios</span>
+
+        <span>Graphite</span>
+
+    </div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="cta">
+
+    <h2>Need Help With Cloud & DevOps?</h2>
+
+    <a th:href="@{/contact}" class="btn">
+
+        Get In Touch
+
+    </a>
+
+</section>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script th:src="@{/js/script.js}"></script>
+
+</body>
+
+</html>

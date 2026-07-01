@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Careers | ABC Technologies</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<header>
+
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+</header>
+
+<!-- Banner -->
+
+<section class="page-banner">
+
+    <div class="banner-content">
+
+        <h1>Careers at ABC Technologies</h1>
+
+        <p>
+
+            Join our team and help build the future of Cloud Computing
+            and DevOps solutions.
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- Why Join -->
+
+<section class="career-intro">
+
+    <h2>Why Join Us?</h2>
+
+    <p>
+
+        At ABC Technologies, we believe in innovation, collaboration,
+        continuous learning, and delivering high-quality cloud solutions.
+        Our employees work with the latest technologies while building
+        products that make a real impact.
+
+    </p>
+
+</section>
+
+<!-- Benefits -->
+
+<section class="benefits">
+
+    <h2>Employee Benefits</h2>
+
+    <div class="benefit-grid">
+
+        <div class="benefit-card">
+
+            <i class="fa-solid fa-laptop-code"></i>
+
+            <h3>Latest Technologies</h3>
+
+            <p>Work with Docker, Kubernetes, AWS, Jenkins and modern DevOps tools.</p>
+
+        </div>
+
+        <div class="benefit-card">
+
+            <i class="fa-solid fa-graduation-cap"></i>
+
+            <h3>Learning & Growth</h3>
+
+            <p>Training programs, certifications and mentorship opportunities.</p>
+
+        </div>
+
+        <div class="benefit-card">
+
+            <i class="fa-solid fa-users"></i>
+
+            <h3>Collaborative Culture</h3>
+
+            <p>Friendly teams that encourage innovation and teamwork.</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Open Positions -->
+
+<section class="jobs">
+
+    <h2>Current Openings</h2>
+
+    <div class="job-card">
+
+        <h3>DevOps Engineer</h3>
+
+        <p>Experience with Docker, Kubernetes, Jenkins and CI/CD pipelines.</p>
+
+    </div>
+
+    <div class="job-card">
+
+        <h3>Cloud Engineer</h3>
+
+        <p>Experience in AWS, Azure, cloud networking and infrastructure automation.</p>
+
+    </div>
+
+    <div class="job-card">
+
+        <h3>Software Engineer</h3>
+
+        <p>Java, Spring Boot, REST APIs and Microservices development.</p>
+
+    </div>
+
+    <div class="job-card">
+
+        <h3>Site Reliability Engineer</h3>
+
+        <p>Infrastructure monitoring, automation and performance optimization.</p>
+
+    </div>
+
+</section>
+
+<!-- Hiring Process -->
+
+<section class="hiring">
+
+    <h2>Our Hiring Process</h2>
+
+    <div class="workflow-container">
+
+        <div class="step">Apply</div>
+
+        <div class="arrow">→</div>
+
+        <div class="step">Screening</div>
+
+        <div class="arrow">→</div>
+
+        <div class="step">Technical Interview</div>
+
+        <div class="arrow">→</div>
+
+        <div class="step">HR Interview</div>
+
+        <div class="arrow">→</div>
+
+        <div class="step">Offer</div>
+
+    </div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="cta">
+
+    <h2>Interested in Joining Our Team?</h2>
+
+    <a th:href="@{/contact}" class="btn">
+
+        Apply Now
+
+    </a>
+
+</section>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script th:src="@{/js/script.js}"></script>
+
+</body>
+
+</html>
