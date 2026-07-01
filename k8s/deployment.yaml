@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: corporatewebsite
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: corporatewebsite
+
+  template:
+    metadata:
+      labels:
+        app: corporatewebsite
+
+    spec:
+      containers:
+      - name: corporatewebsite
+        image: likhith99/corporatewebsite:v1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8081
