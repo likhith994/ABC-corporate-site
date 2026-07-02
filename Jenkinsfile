@@ -19,7 +19,7 @@ pipeline {
                 echo "Checking out source code from GitHub..."
 
                 git branch: 'main',
-                    url: 'git@github.com:likhith994/ABC-corporate-site.git'
+                    url: 'https://github.com/likhith994/ABC-corporate-site.git'
             }
         }
 
