@@ -8,104 +8,80 @@ pipeline {
     }
 
     environment {
-        IMAGE_NAME = "corporatewebsite"
+        IMAGE_NAME = "likhith99/corporatewebsite"
         IMAGE_TAG = "v1"
     }
 
     stages {
 
-        stage('Checkout Source Code') {
-            steps {
-                echo "Checking out source code from GitHub..."
-
-                git branch: 'main',
-                    url: 'https://github.com/likhith994/ABC-corporate-site.git'
-            }
-        }
-
         stage('Verify Tools') {
             steps {
-                echo "Verifying Java..."
+                echo "Verifying Installed Tools..."
 
                 bat 'java -version'
-
-                echo "Verifying Maven..."
-
                 bat 'mvn -version'
-
-                echo "Verifying Docker..."
-
                 bat 'docker --version'
-
-                echo "Verifying Kubernetes..."
-
                 bat 'kubectl version --client'
             }
         }
 
         stage('Clean Project') {
             steps {
-                echo "Cleaning project..."
-
+                echo "Cleaning Project..."
                 bat 'mvn clean'
             }
         }
 
         stage('Compile Project') {
             steps {
-                echo "Compiling project..."
-
+                echo "Compiling Project..."
                 bat 'mvn compile'
             }
         }
 
         stage('Run Unit Tests') {
             steps {
-                echo "Running unit tests..."
-
+                echo "Running Unit Tests..."
                 bat 'mvn test'
             }
         }
 
         stage('Package Application') {
             steps {
-                echo "Packaging Spring Boot application..."
-
-                bat 'mvn package'
+                echo "Packaging Spring Boot Application..."
+                bat 'mvn package -DskipTests'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                echo "Building Docker image..."
-
+                echo "Building Docker Image..."
                 bat 'docker build -t %IMAGE_NAME%:%IMAGE_TAG% .'
             }
         }
 
-        stage('List Docker Images') {
+        stage('Push Docker Image') {
             steps {
-                echo "Available Docker Images"
+                echo "Pushing Docker Image to Docker Hub..."
 
-                bat 'docker images'
+                bat 'docker push %IMAGE_NAME%:%IMAGE_TAG%'
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
-                echo "Deploying application to Kubernetes..."
+                echo "Deploying Application..."
 
                 bat 'kubectl apply -f k8s/deployment.yaml'
-
                 bat 'kubectl apply -f k8s/service.yaml'
             }
         }
 
         stage('Verify Deployment') {
             steps {
-                echo "Checking Deployment..."
+                echo "Checking Deployment Status..."
 
-                bat 'kubectl rollout status deployment/task-manager'
+                bat 'kubectl rollout status deployment/corporatewebsite'
 
                 bat 'kubectl get deployments'
 
@@ -121,31 +97,27 @@ pipeline {
 
         always {
 
-            echo "Pipeline Finished."
+            echo "====================================="
+            echo "Pipeline Finished"
+            echo "====================================="
 
         }
 
         success {
 
-            echo "======================================="
-
+            echo "====================================="
             echo "BUILD SUCCESSFUL"
-
-            echo "Application Deployed Successfully"
-
-            echo "======================================="
+            echo "Corporate Website Successfully Deployed"
+            echo "====================================="
 
         }
 
         failure {
 
-            echo "======================================="
-
+            echo "====================================="
             echo "BUILD FAILED"
-
-            echo "Check Jenkins Console Output"
-
-            echo "======================================="
+            echo "Please Check Jenkins Console Output"
+            echo "====================================="
 
         }
 
