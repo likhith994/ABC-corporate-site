@@ -90,6 +90,13 @@ pipeline {
                 bat 'kubectl get svc'
             }
         }
+        stage('Docker Diagnostics') {
+    steps {
+        bat 'docker info'
+        bat 'docker images'
+        bat 'docker login --username likhith99'
+    }
+}
 
     }
 
