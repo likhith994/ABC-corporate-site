@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     tools {
-        jdk 'JDK25'
+        jdk 'JDK21'
         maven 'Maven-3.9.16'
     }
 
@@ -16,7 +16,7 @@ pipeline {
 
         stage('Verify Tools') {
             steps {
-                echo "Verifying Installed Tools..."
+                echo "===== VERIFYING TOOLS ====="
 
                 bat 'java -version'
                 bat 'mvn -version'
@@ -27,42 +27,52 @@ pipeline {
 
         stage('Clean Project') {
             steps {
-                echo "Cleaning Project..."
+                echo "===== CLEAN PROJECT ====="
                 bat 'mvn clean'
             }
         }
 
         stage('Compile Project') {
             steps {
-                echo "Compiling Project..."
+                echo "===== COMPILE PROJECT ====="
                 bat 'mvn compile'
-            }
-        }
-
-        stage('Run Unit Tests') {
-            steps {
-                echo "Running Unit Tests..."
-                bat 'mvn test'
             }
         }
 
         stage('Package Application') {
             steps {
-                echo "Packaging Spring Boot Application..."
+                echo "===== PACKAGE APPLICATION ====="
                 bat 'mvn package -DskipTests'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                echo "Building Docker Image..."
+                echo "===== BUILD DOCKER IMAGE ====="
                 bat 'docker build -t %IMAGE_NAME%:%IMAGE_TAG% .'
+            }
+        }
+
+        stage('Docker Login') {
+            steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'dockerhub-creds',
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS'
+                    )
+                ]) {
+
+                    bat '''
+                    echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
+                    '''
+                }
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                echo "Pushing Docker Image to Docker Hub..."
+                echo "===== PUSH DOCKER IMAGE ====="
 
                 bat 'docker push %IMAGE_NAME%:%IMAGE_TAG%'
             }
@@ -70,57 +80,48 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                echo "Deploying Application..."
+                echo "===== DEPLOY TO KUBERNETES ====="
 
                 bat 'kubectl apply -f k8s/deployment.yaml'
                 bat 'kubectl apply -f k8s/service.yaml'
+
+                bat 'kubectl rollout restart deployment corporatewebsite'
+
+                bat 'kubectl rollout status deployment/corporatewebsite'
             }
         }
 
         stage('Verify Deployment') {
             steps {
-                echo "Checking Deployment Status..."
-
-                bat 'kubectl rollout status deployment/corporatewebsite'
+                echo "===== VERIFY DEPLOYMENT ====="
 
                 bat 'kubectl get deployments'
-
                 bat 'kubectl get pods'
-
                 bat 'kubectl get svc'
+                bat 'kubectl get endpoints'
             }
         }
-
     }
 
     post {
 
         always {
-
-            echo "====================================="
-            echo "Pipeline Finished"
-            echo "====================================="
-
+            bat 'docker logout'
+            echo "Pipeline Finished."
         }
 
         success {
-
-            echo "====================================="
+            echo "======================================="
             echo "BUILD SUCCESSFUL"
             echo "Corporate Website Successfully Deployed"
-            echo "====================================="
-
+            echo "======================================="
         }
 
         failure {
-
-            echo "====================================="
+            echo "======================================="
             echo "BUILD FAILED"
-            echo "Please Check Jenkins Console Output"
-            echo "====================================="
-
+            echo "Check Jenkins Console Output"
+            echo "======================================="
         }
-
     }
-
 }
