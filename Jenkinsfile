@@ -57,13 +57,13 @@ pipeline {
             steps {
                 withCredentials([
                     usernamePassword(
-                        credentialsId: 'dockerhub-creds',
-                        usernameVariable: 'likhith99',
-                        passwordVariable: '701@Likith'
+                        credentialsId: 'docker-creds',
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS'
                     )
                 ]) {
-
                     bat '''
+                    echo Logging into Docker Hub...
                     echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
                     '''
                 }
@@ -73,7 +73,6 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 echo "===== PUSH DOCKER IMAGE ====="
-
                 bat 'docker push %IMAGE_NAME%:%IMAGE_TAG%'
             }
         }
@@ -86,8 +85,7 @@ pipeline {
                 bat 'kubectl apply -f k8s/service.yaml'
 
                 bat 'kubectl rollout restart deployment corporatewebsite'
-
-                bat 'kubectl rollout status deployment/corporatewebsite'
+                bat 'kubectl rollout status deployment corporatewebsite'
             }
         }
 
