@@ -8,8 +8,8 @@ pipeline {
     }
 
     environment {
-        IMAGE_NAME = "likhith99/corporatewebsite"
-        IMAGE_TAG = "v1"
+        IMAGE_NAME = "corporatewebsite"
+        IMAGE_TAG  = "v1"
     }
 
     stages {
@@ -17,7 +17,6 @@ pipeline {
         stage('Verify Tools') {
             steps {
                 echo "===== VERIFYING TOOLS ====="
-
                 bat 'java -version'
                 bat 'mvn -version'
                 bat 'docker --version'
@@ -53,48 +52,21 @@ pipeline {
             }
         }
 
-        stage('Docker Login') {
-            steps {
-                withCredentials([
-                    usernamePassword(
-                        credentialsId: 'docker-creds',
-                        usernameVariable: 'DOCKER_USER',
-                        passwordVariable: 'DOCKER_PASS'
-                    )
-                ]) {
-                    bat '''
-                    echo Logging into Docker Hub...
-                    echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
-                    '''
-                }
-            }
-        }
-
-        stage('Push Docker Image') {
-            steps {
-                echo "===== PUSH DOCKER IMAGE ====="
-                bat 'docker push %IMAGE_NAME%:%IMAGE_TAG%'
-            }
-        }
-
         stage('Deploy to Kubernetes') {
             steps {
                 echo "===== DEPLOY TO KUBERNETES ====="
-
                 bat 'kubectl apply -f k8s/deployment.yaml'
                 bat 'kubectl apply -f k8s/service.yaml'
-
                 bat 'kubectl rollout restart deployment corporatewebsite'
-                bat 'kubectl rollout status deployment corporatewebsite'
+                bat 'kubectl rollout status deployment/corporatewebsite'
             }
         }
 
         stage('Verify Deployment') {
             steps {
                 echo "===== VERIFY DEPLOYMENT ====="
-
                 bat 'kubectl get deployments'
-                bat 'kubectl get pods'
+                bat 'kubectl get pods -o wide'
                 bat 'kubectl get svc'
                 bat 'kubectl get endpoints'
             }
@@ -102,9 +74,7 @@ pipeline {
     }
 
     post {
-
         always {
-            bat 'docker logout'
             echo "Pipeline Finished."
         }
 
