@@ -9,87 +9,138 @@ pipeline {
 
     environment {
         IMAGE_NAME = "corporatewebsite"
-        IMAGE_TAG  = "v1"
+        IMAGE_TAG = "v1"
     }
 
     stages {
 
+        stage('Checkout Source Code') {
+            steps {
+                echo "Checking out source code from GitHub..."
+
+                git branch: 'main',
+                    url: 'https://github.com/likhith994/ABC-corporate-site.git'
+            }
+        }
+
         stage('Verify Tools') {
             steps {
-                echo "===== VERIFYING TOOLS ====="
+                echo "Verifying Java..."
+
                 bat 'java -version'
+
+                echo "Verifying Maven..."
+
                 bat 'mvn -version'
+
+                echo "Verifying Docker..."
+
                 bat 'docker --version'
+
+                echo "Verifying Kubernetes..."
+
                 bat 'kubectl version --client'
             }
         }
 
         stage('Clean Project') {
             steps {
-                echo "===== CLEAN PROJECT ====="
+                echo "Cleaning project..."
+
                 bat 'mvn clean'
             }
         }
 
         stage('Compile Project') {
             steps {
-                echo "===== COMPILE PROJECT ====="
+                echo "Compiling project..."
+
                 bat 'mvn compile'
             }
         }
 
         stage('Package Application') {
             steps {
-                echo "===== PACKAGE APPLICATION ====="
+                echo "Packaging Spring Boot application..."
+
                 bat 'mvn package -DskipTests'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                echo "===== BUILD DOCKER IMAGE ====="
+                echo "Building Docker image..."
+
                 bat 'docker build -t %IMAGE_NAME%:%IMAGE_TAG% .'
+            }
+        }
+
+        stage('List Docker Images') {
+            steps {
+                echo "Available Docker Images"
+
+                bat 'docker images'
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
-                echo "===== DEPLOY TO KUBERNETES ====="
+                echo "Deploying application to Kubernetes..."
+
                 bat 'kubectl apply -f k8s/deployment.yaml'
+
                 bat 'kubectl apply -f k8s/service.yaml'
-                bat 'kubectl rollout restart deployment corporatewebsite'
-                bat 'kubectl rollout status deployment/corporatewebsite'
             }
         }
 
         stage('Verify Deployment') {
             steps {
-                echo "===== VERIFY DEPLOYMENT ====="
+                echo "Checking Deployment..."
+
+                bat 'kubectl rollout status deployment/corporatewebsite'
+
                 bat 'kubectl get deployments'
-                bat 'kubectl get pods -o wide'
+
+                bat 'kubectl get pods'
+
                 bat 'kubectl get svc'
-                bat 'kubectl get endpoints'
             }
         }
+
     }
 
     post {
+
         always {
+
             echo "Pipeline Finished."
+
         }
 
         success {
+
             echo "======================================="
+
             echo "BUILD SUCCESSFUL"
-            echo "Corporate Website Successfully Deployed"
+
+            echo "Corporate Website Deployed Successfully"
+
             echo "======================================="
+
         }
 
         failure {
+
             echo "======================================="
+
             echo "BUILD FAILED"
+
             echo "Check Jenkins Console Output"
+
             echo "======================================="
+
         }
+
     }
+
 }
