@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: corporatewebsite
-        image: likhith99/corporatewebsite:v1
-        imagePullPolicy: Always
+        image: corporatewebsite:v1
+        imagePullPolicy: Never
         ports:
         - containerPort: 8081
