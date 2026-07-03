@@ -8,6 +8,7 @@ pipeline {
     }
 
     environment {
+        KUBECONFIG = "C:\\Users\\likhith\\.kube\\config"
         IMAGE_NAME = "corporatewebsite"
         IMAGE_TAG = "v1"
     }
